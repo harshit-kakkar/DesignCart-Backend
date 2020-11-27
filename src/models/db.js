@@ -6,30 +6,27 @@ const db = new Sequelize('postgres', 'sportscartuser', 'sportscartpass', {
     dialect: 'postgres',
 })
 
-const Auth = db.define('auth', {
+const Customer = db.define('customer', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
+
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true
+        unique: true
+
     },
     pass_hash: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    last_login: {
-        type: Sequelize.DATE,
-        allowNull: false
-    },
     mobile: {
         type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true
+        unique: true
+
     },
     is_mobile_verified: {
         type: Sequelize.BOOLEAN
@@ -37,39 +34,25 @@ const Auth = db.define('auth', {
     is_email_verified: {
         type: Sequelize.BOOLEAN
     },
-})
-
-const Auth = db.define('customer', {
-    id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
     firstname: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
+
     },
     lastname: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    mobile: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        primaryKey: true
-    },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        primaryKey: true
-    },
     gender: {
         type: Sequelize.STRING
     },
-
+    last_login: {
+        type: Sequelize.DATE,
+        allowNull: false
+    },
 })
+
+
 
 
 module.exports = {
