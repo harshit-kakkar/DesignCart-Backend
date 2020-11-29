@@ -1,7 +1,7 @@
 
 const Sequelize = require('sequelize')
-const db = new Sequelize('postgres', 'sportscartuser', 'sportscartpass', {
-    host: 'sportscart.ci8fuosldpou.ap-south-1.rds.amazonaws.com',
+const db = new Sequelize('postgres', process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
     port: 5432,
     dialect: 'postgres',
 })
