@@ -56,5 +56,5 @@ const Customer = db.define('customer', {
 
 
 module.exports = {
-    db
+    db, Customer
 }
