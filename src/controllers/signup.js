@@ -1,10 +1,39 @@
 const { Customer } = require('../models/db')
+const { Op } = require("sequelize")
+
+async function checkAlreadyExists (email, mobile){
+    let alreadyExists = true
+    let errorMessage = "User already exists"
+
+    try{
+        customer = await Customer.findAll({
+            where: {
+                [Op.or]: [
+                  { email },
+                  { mobile }
+                ]
+            }
+        })
+    } catch(e) {
+        throw e
+    }
+    if (customer.constructor === Array && customer.length===0){
+        alreadyExists = false
+        errorMessage = null
+    }
+    return {"message": errorMessage, "exists": alreadyExists}
+}
 
 async function createCustomer (customerDetails) {
     let message = "Couldn't create user"
     let status = 400
-    if (!customerDetails["firstname"] || !customerDetails["lastname"] || !customerDetails["password"]){
+    if (!customerDetails["firstname"] || !customerDetails["lastname"] || !customerDetails["password"] || !customerDetails["mobile"]){
         message = "validation error"
+        return { "message": message, "status": status}
+    }
+    alreadyExists = await checkAlreadyExists(customerDetails["email"], customerDetails["mobile"])
+    if (alreadyExists["exists"]){
+        message = "User already exists"
         return { "message": message, "status": status}
     }
     try {
