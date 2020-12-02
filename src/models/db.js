@@ -25,7 +25,8 @@ const Customer = db.define('customer', {
     },
     mobile: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        allowNull: false
 
     },
     is_mobile_verified: {
