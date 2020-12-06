@@ -17,12 +17,12 @@ async function authenticate(customerDetails) {
     })
 
     if (!customer) {
-        message = "Wrond Username/password"
+        message = "Wrong Username/password"
         return { "message": message, "status": status }
     }
 
     if (customer.pass_hash !== customerDetails["password"]) {
-        message = "Wrond Username/password"
+        message = "Wrong Username/password"
         return { "message": message, "status": status }
     }
     message = "Customer logged-in successfully"
