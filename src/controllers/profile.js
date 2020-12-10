@@ -19,7 +19,7 @@ async function fetchProfile(email){
     return {profileObj, status}
 }
 
-async function updateProfile(reqObj){
+async function updateProfile(reqObj, reqEmail){
     let status = 400
     let message = "Couldn't update the profile"
 
@@ -37,7 +37,7 @@ async function updateProfile(reqObj){
     try{
         await Customer.update(
             updateObj,
-            {where: { email: reqObj["email"] }}
+            {where: { email: reqEmail }}
         )
         status = 200
         message = "Profile updated"

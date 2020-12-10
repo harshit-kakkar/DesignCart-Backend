@@ -3,8 +3,8 @@ const { fetchProfile, updateProfile } = require('../controllers/profile')
 
 route.get('/profile', async (req, res) => {
     let req_email = ""
-    if (req.query.email){
-        req_email = req.query.email
+    if (req.email){
+        req_email = req.email
     }
     else{
         res.status(400).send({"message": "Email id required to fetch profile"})
@@ -14,7 +14,7 @@ route.get('/profile', async (req, res) => {
 })
 
 route.patch('/profile', async (req, res) => {
-    update_res = await updateProfile(req.body)
+    update_res = await updateProfile(req.body, req.email)
     res.status(update_res["status"]).send({"message":update_res["message"]})
 })
 
